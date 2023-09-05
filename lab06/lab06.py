@@ -71,6 +71,10 @@ def insert_items(lst, entry, elem):
     True
     """
     "*** YOUR CODE HERE ***"
-
-
-
+    length = len(lst)
+    adjustIndex = 0
+    for  i in range(length,0 , -1):
+       if(lst[i-1] == entry):
+            adjustIndex = i
+            lst[adjustIndex:adjustIndex] = [elem]      
+    return lst
