@@ -69,6 +69,3 @@ def insert_items(lst, entry, elem):
 
 
 
-adder1 = make_adder_inc(5)
-adder1(a2 = 2) 
-adder1(a2 = 2) 
