@@ -68,7 +68,28 @@ def make_withdraw(balance, password):
     >>> type(w(10, 'l33t')) == str
     True
     """
-    "*** YOUR CODE HERE ***"
+    errpwd = []
+    errNotice = "Frozen account. Attempts: {}"
+    def withdraw(amount, pwd):
+         nonlocal errpwd
+         nonlocal errNotice
+         nonlocal password
+         nonlocal balance
+         if (len(errpwd) >= 3 ):
+              return errNotice.format(errpwd)
+         else:
+            if(password  == pwd  ):
+                 if(balance > amount):
+                      balance -= amount
+                      return balance
+                 else:
+                      return 'Insufficient funds'
+            else:
+                errpwd.append(pwd)
+                return  'Incorrect password'   
+    return withdraw              
+
+          
 
 
 def repeated(t, k):
