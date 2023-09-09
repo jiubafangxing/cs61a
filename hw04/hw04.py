@@ -218,6 +218,15 @@ def make_joint(withdraw, old_pass, new_pass):
         return  testpwdresult
     return withdraw_proxy 
 
+def makeIgenerator(i, m):
+     genIResult = []
+     idx = 0
+     while(len(genIResult) < 3):
+           genNum = idx * m + i
+           idx+=1
+           if(genNum> 0):
+                genIResult.append(genNum)
+     yield from genIResult
 
 
 def remainders_generator(m):
@@ -252,6 +261,8 @@ def remainders_generator(m):
     11
     """
     "*** YOUR CODE HERE ***"
+    for i  in range(m):
+         yield makeIgenerator(i,m)
 
 
 def naturals():
