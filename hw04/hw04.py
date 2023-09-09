@@ -205,6 +205,19 @@ def make_joint(withdraw, old_pass, new_pass):
     "Frozen account. Attempts: ['my', 'secret', 'password']"
     """
     "*** YOUR CODE HERE ***"
+    
+    def withdraw_proxy(amount , pwd):
+         nonlocal new_pass
+         nonlocal old_pass
+         if(new_pass == pwd):
+              return withdraw(amount, old_pass)
+         else:
+              return withdraw(amount, pwd) 
+    testpwdresult =      withdraw(0,old_pass)
+    if(type(testpwdresult) == str):
+        return  testpwdresult
+    return withdraw_proxy 
+
 
 
 def remainders_generator(m):
