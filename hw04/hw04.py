@@ -114,6 +114,16 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
+    num = 1
+    existCompareItem = next(t)
+    for item in t:
+         if(existCompareItem == item):
+              num+=1
+              if(num == k):
+                   return existCompareItem
+         else:
+              existCompareItem = item
+              num =1        
 
 
 def permutations(seq):
@@ -222,7 +232,7 @@ def naturals():
 
     >>> m = naturals()
     >>> type(m)
-    <class 'generator'>
+    <class 'generator'3
     >>> [next(m) for _ in range(10)]
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     """
