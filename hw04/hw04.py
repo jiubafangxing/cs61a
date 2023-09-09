@@ -125,8 +125,21 @@ def repeated(t, k):
               existCompareItem = item
               num =1        
 
-
+def findSeqResult(seq):
+        seqlen = len(seq) 
+        result = []
+        if(seqlen == 1):
+             result.append(seq)
+             return result
+        else :
+              for i in range(seqlen):
+                newseq = seq[0:i] + seq[i+1:]
+                subseqResult = findSeqResult(newseq)
+                for subseq in subseqResult:
+                   result.append([seq[i]]+ subseq) 
+              return result
 def permutations(seq):
+
     """Generates all permutations of the given sequence. Each permutation is a
     list of the elements in SEQ in a different order. The permutations may be
     yielded in any order.
@@ -149,6 +162,8 @@ def permutations(seq):
     [['a', 'b'], ['b', 'a']]
     """
     "*** YOUR CODE HERE ***"
+    convert_param   =   list(seq)
+    yield from findSeqResult(convert_param)    
 
 
 def make_joint(withdraw, old_pass, new_pass):
@@ -240,3 +255,4 @@ def naturals():
     while True:
         yield i
         i += 1 
+
