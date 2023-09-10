@@ -29,7 +29,15 @@ def scale(it, multiplier):
     "*** YOUR CODE HERE ***"
     yield from map(lambda x: x* multiplier, it)
 
-
+def hailstone_compute(n):
+    while(True):
+        yield n
+        if(n == 1):
+            return
+        elif (n%2 == 0):
+            n = n//2
+        else:
+            n = n*3+1 
 def hailstone(n):
     """
     >>> for num in hailstone(10):
@@ -44,4 +52,4 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
-
+    yield from hailstone_compute(n)
