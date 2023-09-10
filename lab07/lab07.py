@@ -13,7 +13,6 @@ def naturals():
         yield i
         i += 1
 
-
 def scale(it, multiplier):
     """Yield elements of the iterable it scaled by a number multiplier.
 
@@ -28,6 +27,7 @@ def scale(it, multiplier):
     [2, 4, 6, 8, 10]
     """
     "*** YOUR CODE HERE ***"
+    yield from map(lambda x: x* multiplier, it)
 
 
 def hailstone(n):
