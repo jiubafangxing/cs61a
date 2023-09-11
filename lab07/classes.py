@@ -117,6 +117,9 @@ class Player:
         2
         """
         "*** YOUR CODE HERE ***"
+        card = self.hand[card_index]
+        del[self.hand[card_index]]
+        return card
 
     def display_hand(self):
         """
