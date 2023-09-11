@@ -9,27 +9,21 @@ test = {
           >>> from car import *
           >>> deneros_car = Car('Tesla', 'Model S')
           >>> deneros_car.model
-          d44fbfeedd5748e8ed04de29de968251
-          # locked
+          'Model S'
           >>> deneros_car.gas = 10
           >>> deneros_car.drive()
-          08adfbe4efff8d65757aa6e3130e95d6
-          # locked
+          'Tesla Model S goes vroom!'
           >>> deneros_car.drive()
-          ed7e31d39fdaefb22a23971c5b0eb43d
-          # locked
+          'Cannot drive!'
           >>> deneros_car.fill_gas()
-          73199fd3939cadd5e1e581b76e26a9e9
-          # locked
+          'Gas level: 20'
           >>> deneros_car.gas
-          e1b5abca0ce46c01fbc9ffe5da884d06
-          # locked
+          20
           >>> Car.gas
-          cf3b881608904e51c384abfbd72a7cc8
-          # locked
+          30
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         },
         {
           'code': r"""
