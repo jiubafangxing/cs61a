@@ -84,6 +84,8 @@ class Player:
         self.deck = deck
         self.name = name
         "*** YOUR CODE HERE ***"
+        self.hand= [self.deck.cards.pop() for _ in range(5)]
+
 
     def draw(self):
         """Draw a card from the player's deck and add it to their hand.
