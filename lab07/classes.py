@@ -100,6 +100,7 @@ class Player:
         """
         assert not self.deck.is_empty(), 'Deck is empty!'
         "*** YOUR CODE HERE ***"
+        self.hand.append(self.deck.cards.pop())
 
     def play(self, card_index):
         """Remove and return a card from the player's hand at the given index.
