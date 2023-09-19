@@ -26,6 +26,7 @@ class Place:
         # BEGIN Problem 2
         "*** YOUR CODE HERE ***"
         if exit:
+            #If the Place has an exit, then the exit's entrance is set to that Place.
             self.entrance = exit.entrance
         # END Problem 2
 
