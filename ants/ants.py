@@ -104,6 +104,7 @@ class Ant(Insect):
 
     implemented = False  # Only implemented Ant classes should be instantiated
     food_cost = 0
+
     # ADD CLASS ATTRIBUTES HERE
 
     def __init__(self, armor=1):
@@ -166,6 +167,8 @@ class ThrowerAnt(Ant):
     damage = 1
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 3
+    min_range = 0
+    max_range = float('inf') 
 
     def nearest_bee(self, beehive):
         """Return the nearest Bee in a Place that is not the HIVE (beehive), connected to
@@ -176,14 +179,17 @@ class ThrowerAnt(Ant):
         # BEGIN Problem 3 and 4
         tofind  = self.place 
         findResult = None
+        step = 0
         while( tofind != beehive):
             if(tofind is None):
                 break
             beessize = len(tofind.bees)
-            if(beessize >  0):
+            #print("type:{} min_range:{} max_range{}".format(type(self),type(self).min_range, type(self).max_range))
+            if(beessize >  0 and self.min_range <= step and self.max_range >= step):
                 findResult = tofind
                 break
             tofind = tofind.entrance
+            step+=1
         if(findResult is None):
             return findResult
         else: 
@@ -216,8 +222,12 @@ class ShortThrower(ThrowerAnt):
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
     # END Problem 4
+    min_range = 0
+    max_range =  3
+    def __init__(self, armor=1):
+        ThrowerAnt.__init__(self, armor)
 
 class LongThrower(ThrowerAnt):
     """A ThrowerAnt that only throws leaves at Bees at least 5 places away."""
@@ -226,7 +236,11 @@ class LongThrower(ThrowerAnt):
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
+    min_range = 5
+    max_range = float('inf') 
+    def __init__(self, armor=1):
+        ThrowerAnt.__init__(self, armor)
     # END Problem 4
 
 class FireAnt(Ant):
