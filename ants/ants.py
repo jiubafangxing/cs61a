@@ -251,7 +251,7 @@ class FireAnt(Ant):
     food_cost = 5
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 5
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
     # END Problem 5
 
     def __init__(self, armor=3):
@@ -267,6 +267,21 @@ class FireAnt(Ant):
         """
         # BEGIN Problem 5
         "*** YOUR CODE HERE ***"
+        placeBeesOri = self.place.bees
+        placeBees = placeBeesOri[:]
+        if(len(placeBees)>0):
+            for i in range(0, len(placeBeesOri)):
+                placeBees[i].reduce_armor(amount)
+                #print("new list size is {}",len(placeBees))
+                #print("old list size is {}",len(placeBeesOri))
+                #print(i)
+        if(self.armor-amount <=0):
+            for i in range(0, len(placeBeesOri)):
+                placeBees[i].reduce_armor(self.damage)
+                #print("new list size is {}",len(placeBees))
+                #print("old list size is {}",len(placeBeesOri))
+                #print(i)
+        Ant.reduce_armor(self, amount)
         # END Problem 5
 
 class HungryAnt(Ant):
@@ -405,7 +420,6 @@ class Bee(Insect):
     def add_to(self, place):
         place.bees.append(self)
         Insect.add_to(self, place)
-
     def remove_from(self, place):
         place.bees.remove(self)
         Insect.remove_from(self, place)
