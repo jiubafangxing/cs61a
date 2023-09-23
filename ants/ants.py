@@ -367,7 +367,7 @@ class QueenAnt(Ant):  # You should change this line
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem EC
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
     # END Problem EC
 
     def __init__(self, armor=1):
