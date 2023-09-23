@@ -156,7 +156,7 @@ class HarvesterAnt(Ant):
         # BEGIN Problem 1
         "*** YOUR CODE HERE ***"
         gamestate.food += 1
-        
+
         # END Problem 1
 
 
@@ -356,23 +356,33 @@ class ScubaThrower(ThrowerAnt):
     food_cost = 6
     is_watersafe = True
 
+
 # END Problem 9
 
 # BEGIN Problem EC
-class QueenAnt(Ant):  # You should change this line
-# END Problem EC
+class QueenAnt(ScubaThrower):  # You should change this line
+    # END Problem EC
     """The Queen of the colony. The game is over if a bee enters her place."""
 
     name = 'Queen'
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem EC
+    initia_flag = False
     implemented = True# Change to True to view in the GUI
     # END Problem EC
 
     def __init__(self, armor=1):
         # BEGIN Problem EC
         "*** YOUR CODE HERE ***"
+        if(QueenAnt.initia_flag == False):
+           self.first = True
+           self.powerAnts = []
+           QueenAnt.initia_flag = True
+        else:
+           self.first = False
+        ScubaThrower.__init__(self, armor)
+
         # END Problem EC
 
     def action(self, gamestate):
@@ -383,6 +393,18 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem EC
         "*** YOUR CODE HERE ***"
+        if(self.first == True):
+            ScubaThrower.action(self, gamestate)
+            startplace = self.place.exit
+            while(startplace):
+                topowerant = startplace.ant
+                if(topowerant  and (topowerant not in self.powerAnts)):
+                    dm = topowerant.damage
+                    topowerant.damage +=dm
+                    self.powerAnts.append(topowerant)
+                startplace = startplace.exit    
+        else:
+            self.reduce_armor(self.armor)
         # END Problem EC
 
     def reduce_armor(self, amount):
@@ -391,9 +413,14 @@ class QueenAnt(Ant):  # You should change this line
         """
         # BEGIN Problem EC
         "*** YOUR CODE HERE ***"
+        ScubaThrower.reduce_armor(self, amount)
+        if(self.first == True):
+            if(self.armor == 0):
+               bees_win()
         # END Problem EC
-
-
+    def remove_from(self, place):
+        if(self.first == False):
+            ScubaThrower.remove_from(self,place)
 
 class AntRemover(Ant):
     """Allows the player to remove ants from the board in the GUI."""
@@ -427,7 +454,7 @@ class Bee(Insect):
         # Special handling for NinjaAnt
         # BEGIN Problem Optional
         return self.place.ant is not None
-        # END Problem Optional
+    # END Problem Optional
 
     def action(self, gamestate):
         """A Bee's action stings the Ant that blocks its exit if it is blocked,
@@ -611,12 +638,12 @@ class LaserAnt(ThrowerAnt):
     def insects_in_front(self, beehive):
         # BEGIN Problem Optional 5
         return {}
-        # END Problem Optional 5
+    # END Problem Optional 5
 
     def calculate_damage(self, distance):
         # BEGIN Problem Optional 5
         return 0
-        # END Problem Optional 5
+    # END Problem Optional 5
 
     def action(self, gamestate):
         insects_and_distances = self.insects_in_front(gamestate.beehive)
