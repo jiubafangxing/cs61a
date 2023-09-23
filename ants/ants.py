@@ -415,7 +415,8 @@ class QueenAnt(ScubaThrower):  # You should change this line
         "*** YOUR CODE HERE ***"
         ScubaThrower.reduce_armor(self, amount)
         if(self.first == True):
-            if(self.armor == 0):
+            print(self.armor)
+            if(self.armor <= 0):
                bees_win()
         # END Problem EC
     def remove_from(self, place):
