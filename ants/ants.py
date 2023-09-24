@@ -495,7 +495,7 @@ class NinjaAnt(Ant):
     blocks_path = False
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem Optional 1
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
     # END Problem Optional 1
 
     def action(self, gamestate):
