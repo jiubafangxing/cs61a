@@ -126,8 +126,14 @@ class Ant(Insect):
             place.ant = self
         else:
             # BEGIN Problem Optional 2
-            assert place.ant is None, 'Two ants in {0}'.format(place)
+            #assert place.ant is None and place.ant , 'Two ants in {0}'.format(place)
+            assert (place.ant.can_contain(self) ) or( self.can_contain(place.ant)), 'Two ants in {0}'.format(place)
             # END Problem Optional 2
+            if(place.ant.can_contain(self)):
+                place.ant.contained_ant = self
+            elif(self.can_contain(place.ant)) :
+                self.contained_ant = place.ant
+                place.ant = self
         Insect.add_to(self, place)
 
     def remove_from(self, place):
@@ -517,11 +523,18 @@ class ContainerAnt(Ant):
     def can_contain(self, other):
         # BEGIN Problem Optional 2
         "*** YOUR CODE HERE ***"
+        if(isinstance(other, ContainerAnt)):
+            return False 
+        elif (self.contained_ant == None):
+            return True
+        else:
+            return False
         # END Problem Optional 2
 
     def contain_ant(self, ant):
         # BEGIN Problem Optional 2
         "*** YOUR CODE HERE ***"
+        self.contain_ant = ant
         # END Problem Optional 2
 
     def remove_ant(self, ant):
@@ -542,6 +555,10 @@ class ContainerAnt(Ant):
     def action(self, gamestate):
         # BEGIN Optional 2
         "*** YOUR CODE HERE ***"
+        if(self.contained_ant != None):
+            #print(self.contained_ant.place.bees)
+            self.contained_ant.action(gamestate)
+
         # END Optional 2
 
 class BodyguardAnt(ContainerAnt):
@@ -551,8 +568,13 @@ class BodyguardAnt(ContainerAnt):
     food_cost = 4
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Optional 2
-    implemented = False   # Change to True to view in the GUI
+    implemented = True# Change to True to view in the GUI
     # END Optional 2
+    # OVERRIDE CLASS ATTRIBUTES HERE
+    # BEGIN Problem 9
+    def __init__(self, armor=2):
+        super().__init__(armor)
+
 
 class TankAnt(ContainerAnt):
     """TankAnt provides both offensive and defensive capabilities."""
