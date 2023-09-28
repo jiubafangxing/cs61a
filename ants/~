@@ -421,8 +421,9 @@ class QueenAnt(ScubaThrower):  # You should change this line
         "*** YOUR CODE HERE ***"
         ScubaThrower.reduce_armor(self, amount)
         if(self.first == True):
+            print(self.armor)
             if(self.armor <= 0):
-                bees_win()
+               bees_win()
         # END Problem EC
     def remove_from(self, place):
         if(self.first == False):
@@ -472,12 +473,10 @@ class Bee(Insect):
 
         gamestate -- The GameState, used to access game state information.
         """
-        if(str(self.direction) == "LEFT"):
+        if(self.direction == "LEFT"):
             destination = self.place.exit
         else:
             destination = self.place.entrance
-            if isinstance(self.place,Hive):
-                destination = self.place
 
         # Extra credit: Special handling for bee direction
         # BEGIN EC
@@ -503,7 +502,7 @@ class NinjaAnt(Ant):
     """NinjaAnt does not block the path and damages all bees in its place.
     This class is optional.
     """
-
+    
     name = 'Ninja'
     damage = 1
     food_cost = 5
@@ -621,7 +620,7 @@ def make_slow(action, bee):
     """
     def newaction(gamestate):
         if(gamestate.time % 2 == 0):
-            return  action(gamestate)
+           return  action(gamestate)
     return newaction
 
 def make_scare(action, bee):
@@ -633,22 +632,22 @@ def make_scare(action, bee):
     "*** YOUR CODE HERE ***"
     def newaction(gamestate):
         bee.direction = "RIGHT"
-        action( gamestate)
+        bee.action( gamestate)
         bee.direction = "LEFT"
     return newaction 
-# END Problem Optional 4
+    # END Problem Optional 4
 
 def apply_status(status, bee, length):
     """Apply a status to a BEE that lasts for LENGTH turns."""
     # BEGIN Problem Optional 4
     "*** YOUR CODE HERE ***"
     oriaction = bee.action
-    mynewaction = status(bee.action,bee)
+    newaction = status(oriaction,bee)
     def alt_status(gamestate):
         nonlocal length
         if(length > 0):
-           mynewaction(gamestate)
            length -=1
+           newaction(gamestate)
         else:
            oriaction(gamestate) 
     bee.action = alt_status
@@ -683,7 +682,6 @@ class ScaryThrower(ThrowerAnt):
         "*** YOUR CODE HERE ***"
         if(target and target.scared == False):
             apply_status(make_scare, target, 2)
-            target.scared = True
         # END Problem Optional 4
 
 class LaserAnt(ThrowerAnt):
