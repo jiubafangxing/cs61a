@@ -8,8 +8,12 @@ def convert_link(link):
     []
     """
     "*** YOUR CODE HERE ***"
-
-
+    result = []
+    findResult = link
+    while(findResult):
+        result.append(findResult.first)
+        findResult  = findResult.rest
+    return findResult 
 def every_other(s):
     """Mutates a linked list so that all the odd-indiced elements are removed
     (using 0-based indexing).
